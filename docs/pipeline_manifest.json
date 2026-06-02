@@ -1,0 +1,43 @@
+{
+  "projectName": "Serverless Event-Driven Image Processing Pipeline",
+  "documentationFormat": "Documentation-as-Code (DaC) Manifest",
+  "projectServices": {
+    "storage": "Amazon S3",
+    "compute": ["AWS Lambda", "AWS Fargate"],
+    "database": "Amazon DynamoDB",
+    "aiService": "Amazon Rekognition",
+    "containerRegistry": "Amazon ECR"
+  },
+  "imagePipelineSteps": [
+    {
+      "step": 1,
+      "name": "User Upload",
+      "description": "User uploads a raw image directly to the Amazon S3 ingestion bucket."
+    },
+    {
+      "step": 2,
+      "name": "S3 Event Trigger",
+      "description": "S3 detects the new object creation and automatically publishes an event notification."
+    },
+    {
+      "step": 3,
+      "name": "Lambda Orchestration",
+      "description": "AWS Lambda is triggered by the S3 event, extracts the metadata, and coordinates the processing layers."
+    },
+    {
+      "step": 4,
+      "name": "Fargate Image Manipulation",
+      "description": "For heavy image manipulation, Lambda passes tasks to a containerized Fargate task pulled from Amazon ECR."
+    },
+    {
+      "step": 5,
+      "name": "Rekognition Analysis",
+      "description": "Amazon Rekognition processes the image to extract descriptive properties and tags."
+    },
+    {
+      "step": 6,
+      "name": "Data Persistence",
+      "description": "The extracted image properties, tags, and S3 file locations are written to Amazon DynamoDB."
+    }
+  ]
+}
