@@ -51,3 +51,8 @@ To examine the technical structural blueprint on your own machine:
    cd docs
    ```
 3. Open `pipeline_manifest.json` using your favorite text editor, IDE, or web browser to review the pipeline mapping schemas.
+
+## Team BMR Members
+**b** Beau
+**M** Marianne
+**R** Ricky
