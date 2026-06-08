@@ -50,8 +50,8 @@ This is a standard component of S3 upload architecture and ensures the frontend 
 This Lambda function is the entry point for my portion of the serverless pipeline. It is triggered automatically whenever a new file is uploaded to the designated S3 input bucket.
 
 ### Trigger
-- **Event Source:** s3:ObjectCreated:*  
-- **Bucket:** Shared input bucket (ARN provided in Terraform variables)
+- Event Source: s3:ObjectCreated:*  
+- Bucket: Shared input bucket (ARN provided in Terraform variables)
 
 ### Function Responsibilities
 - Parse S3 event notification to extract:
@@ -62,7 +62,7 @@ This Lambda function is the entry point for my portion of the serverless pipelin
   - File type  
 - Validate uploaded object (image file, non‑zero size)  
 - Generate a unique record ID  
-- Write a structured item to the shared DynamoDB table (`bmr-dynamodb-table`) including:
+- Write a structured item to the shared DynamoDB table (bmr-dynamodb-table) including:
   - id (UUID)  
   - filename  
   - bucket  
@@ -83,12 +83,12 @@ This Lambda establishes the first step in the pipeline and ensures every uploade
 
 ## 🛠️ Terraform File Overview
 
-**main.tf** – AWS provider and region  
-**variables.tf** – Input variables  
-**S3.tf** – Input/output S3 buckets  
-**iam.tf** – IAM roles and policies  
-**lambda.tf** – Lambda deployment and permissions  
-**ecs.tf** – ECS task definition for downstream processing  
+- main.tf – AWS provider and region  
+- variables.tf – Input variables  
+- S3.tf – Input/output S3 buckets  
+- iam.tf – IAM roles and policies  
+- lambda.tf – Lambda deployment and permissions  
+- ecs.tf – ECS task definition for downstream processing  
 
 ---
 
@@ -96,23 +96,23 @@ This Lambda establishes the first step in the pipeline and ensures every uploade
 
 1. Install Terraform  
 2. Configure AWS credentials  
-3. Run `terraform init`  
-4. Run `terraform apply`  
+3. Run terraform init  
+4. Run terraform apply  
 
 ---
 
 ## 📁 Repository Structure
 
-- `/terraform` – All Terraform configuration files  
-- `/Documentation` – Final Turn In doc, SOW, required screenshots, and diagrams  
-- `/Interface` – Upload interface files  
-- `/Diagrams` – Architecture diagrams  
-- `/screenshots` – (If used) supporting images  
+- /terraform – All Terraform configuration files  
+- /Documentation – Final Turn In doc, SOW, required screenshots, and diagrams  
+- /Interface – Upload interface files  
+- /Diagrams – Architecture diagrams  
+- /screenshots – (If used) supporting images  
 
 ---
 
 ## 🖼️ Screenshots
 
-All required screenshots and diagrams are included in the **Final Turn In** documentation file located in the Documentation folder.
+All required screenshots and diagrams are included in the Final Turn In documentation file located in the Documentation folder.
 
 ---
