@@ -47,8 +47,29 @@ This is a standard component of S3 upload architecture and ensures the frontend 
 
 ## 🖼️ S3‑Triggered Lambda: Image Metadata Processor
 
-This Lambda function is the entry point for my portion of the serverless pipeline. It is triggered automatically whenever a new file is uploaded to the designated S3 input bucket.
+This Lambda function is the entry point for my portion of the serverless pipeline. It is triggered automatically whenever a new file is uploaded to the designated S3 input bucket. The event source is the `s3:ObjectCreated:*` notification, which fires each time an object is created in the shared input bucket. The bucket ARN is provided through Terraform variables, ensuring the function is tightly integrated with the group’s shared infrastructure.
 
-### Trigger
-- Event Source: s3:ObjectCreated:*  
-- Bucket: Shared
+### Function Responsibilities
+- Parse S3 event notification to extract:
+  - Bucket name  
+  - Object key  
+  - Timestamp  
+  - File size  
+  - File type  
+- Validate uploaded object (image file, non‑zero size)  
+- Generate a unique record ID  
+- Write a structured item to the shared DynamoDB table (bmr-dynamodb-table) including:
+  - id (UUID)  
+  - filename  
+  - bucket  
+  - timestamp  
+  - filesize  
+  - filetype  
+  - status (“received”)  
+  - notes (“Initial metadata recorded”)
+
+### Outputs
+- A DynamoDB record representing the uploaded file  
+- CloudWatch logs for debugging and traceability  
+
+### Why This Matters
