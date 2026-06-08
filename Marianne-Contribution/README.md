@@ -9,7 +9,7 @@ This project demonstrates a complete AWS infrastructure deployment using Terrafo
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 This repository contains my portion of the IT 261 final project, which includes:
 
@@ -24,7 +24,7 @@ The project provisions AWS resources using Terraform, deploys a Lambda function,
 
 ---
 
-## 🧩 Presigned URL Generator (Lightweight Lambda)
+## Presigned URL Generator (Lightweight Lambda)
 
 To support uploading any user‑selected image to the S3 input bucket, the project includes a small Lambda function that generates pre‑signed S3 URLs on demand.
 
@@ -43,9 +43,9 @@ It enables the upload page to:
 
 ---
 
-## 🖼️ S3‑Triggered Lambda: Image Metadata Processor
+## S3‑Triggered Lambda: Image Metadata Processor
 
-This Lambda function is the entry point for my portion of the serverless pipeline. It is triggered automatically whenever a new file is uploaded to the designated S3 input bucket. The event source is the `s3:ObjectCreated:*` notification, which fires each time an object is created in the shared input bucket. The bucket ARN is provided through Terraform variables, ensuring the function is tightly integrated with the group’s shared infrastructure.
+This Lambda function is the entry point for my portion of the serverless pipeline. It is triggered automatically whenever a new file is uploaded to the designated S3 input bucket. The event source is the `s3:ObjectCreated:*` notification, which fires each time an object is created in the shared input bucket. Terraform passes the bucket ARN to the Lambda as a variable, removing the need to hard‑code it.
 
 ### Function Responsibilities
 - Parse S3 event notification to extract:
@@ -75,7 +75,7 @@ This Lambda establishes the first step in the pipeline and ensures every uploade
 
 ---
 
-## 🛠️ Terraform File Overview
+## Terraform File Overview
 
 - main.tf – AWS provider and region  
 - variables.tf – Input variables  
@@ -86,7 +86,7 @@ This Lambda establishes the first step in the pipeline and ensures every uploade
 
 ---
 
-## ▶️ How to Run the Project
+## How to Run the Project
 
 1. Install Terraform  
 2. Configure AWS credentials  
@@ -95,18 +95,7 @@ This Lambda establishes the first step in the pipeline and ensures every uploade
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 - /terraform – All Terraform configuration files  
-- /Documentation – Final Turn In doc, SOW, required screenshots, and diagrams  
-- /Interface – Upload interface files  
-- /Diagrams – Architecture diagrams  
-- /screenshots – supporting images  
-
----
-
-## 🖼️ Screenshots
-
-All required screenshots and diagrams are included in the Final Turn In documentation file located in the Documentation folder.
-
----
+- /Documentation – Final Turn In doc, SOW, required
