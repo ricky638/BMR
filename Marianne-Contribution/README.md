@@ -16,7 +16,8 @@ This repository contains my portion of the IT 261 final project, which includes:
 - Terraform configuration files (IAM, Lambda, S3, ECS, variables, etc.)
 - Lambda function code
 - Documentation files
-- Screenshots demonstrating the working pipeline
+- Architecture diagrams
+- Required screenshots demonstrating the working pipeline
 - Statement of Work and project checklist
 
 The project provisions AWS resources using Terraform, deploys a Lambda function, and demonstrates automated infrastructure deployment.
@@ -25,7 +26,7 @@ The project provisions AWS resources using Terraform, deploys a Lambda function,
 
 ## 🧩 Presigned URL Generator (Lightweight Lambda)
 
-To support uploading any user‑selected image to the S3 input bucket, the project includes a small Lambda function that generates **pre‑signed S3 URLs** on demand.
+To support uploading any user‑selected image to the S3 input bucket, the project includes a small Lambda function that generates pre‑signed S3 URLs on demand.
 
 This Lambda:
 
@@ -48,11 +49,11 @@ This is a standard component of S3 upload architecture and ensures the frontend 
 
 This Lambda function is the entry point for my portion of the serverless pipeline. It is triggered automatically whenever a new file is uploaded to the designated S3 input bucket.
 
-### **Trigger**
-- **Event Source:** `s3:ObjectCreated:*`  
+### Trigger
+- **Event Source:** s3:ObjectCreated:*  
 - **Bucket:** Shared input bucket (ARN provided in Terraform variables)
 
-### **Function Responsibilities**
+### Function Responsibilities
 - Parse S3 event notification to extract:
   - Bucket name  
   - Object key  
@@ -62,20 +63,20 @@ This Lambda function is the entry point for my portion of the serverless pipelin
 - Validate uploaded object (image file, non‑zero size)  
 - Generate a unique record ID  
 - Write a structured item to the shared DynamoDB table (`bmr-dynamodb-table`) including:
-  - `id` (UUID)  
-  - `filename`  
-  - `bucket`  
-  - `timestamp`  
-  - `filesize`  
-  - `filetype`  
-  - `status` (“received”)  
-  - `notes` (“Initial metadata recorded”)
+  - id (UUID)  
+  - filename  
+  - bucket  
+  - timestamp  
+  - filesize  
+  - filetype  
+  - status (“received”)  
+  - notes (“Initial metadata recorded”)
 
-### **Outputs**
+### Outputs
 - A DynamoDB record representing the uploaded file  
 - CloudWatch logs for debugging and traceability  
 
-### **Why This Matters**
+### Why This Matters
 This Lambda establishes the first step in the pipeline and ensures every uploaded file is tracked consistently. It decouples the upload interface from downstream processing, allowing the ECS/Fargate stage to operate independently.
 
 ---
@@ -103,19 +104,15 @@ This Lambda establishes the first step in the pipeline and ensures every uploade
 ## 📁 Repository Structure
 
 - `/terraform` – All Terraform configuration files  
-- `/Documentation` – Final Turn In doc, SOW, screenshots, and supporting documents  
+- `/Documentation` – Final Turn In doc, SOW, required screenshots, and diagrams  
 - `/Interface` – Upload interface files  
 - `/Diagrams` – Architecture diagrams  
-- `/screenshots` – Proof of working pipeline (included in documentation files)  
+- `/screenshots` – (If used) supporting images  
 
 ---
 
 ## 🖼️ Screenshots
 
-All screenshots are included in the documentation files:
-
-- `final project screenshots.docx`  
-- `more screenshots of final project.docx`  
-- `even more screenshots.docx`  
+All required screenshots and diagrams are included in the **Final Turn In** documentation file located in the Documentation folder.
 
 ---
